@@ -35,12 +35,12 @@ function App() {
         <ChakraProvider>
             <div className="App">
             <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" h="100vh">
-                <Box display="flex" gap="5px" flexDirection="column" justifyContent="center" alignItems="center" w="200px">
+                <Box display="flex" gap="5px" flexDirection="column" justifyContent="center" w="200px">
                     <Box display="flex" w="100%" justifyContent="between">
-                        <Text display="flex" justifyContent="start" alignContent="center" bg="gray.50" w="100%" h="38px" px="4px" borderRadius="8px">
+                        <Text display="flex" alignItems="center" bg="gray.50" w="100%" h="38px" px="4px" borderRadius="8px">
                             {counts}
                         </Text>
-                        <Text w="fit-content" h="38px" textColor="tomato">
+                        <Text display="flex" alignItems="center" w="fit-content" h="38px" textColor="tomato">
                             {result}
                         </Text>
                     </Box>
@@ -79,12 +79,12 @@ function App() {
 
         )
       }
-    
+
       function applyExpression (countedNumber) {
             setCounts(countedNumber)
             setResult(eval(counts))
       }
 
   }
-  
+
   export default App;
