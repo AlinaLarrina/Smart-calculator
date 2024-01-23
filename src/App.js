@@ -35,7 +35,7 @@ function App() {
         <ChakraProvider>
             <div className="App">
             <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" h="100vh">
-                <Box display="flex" gap="5px" flexDirection="column" justifyContent="center" w="200px">
+                <Box display="flex" gap="5px" flexDirection="column" justifyContent="center" w="238px">
                     <Box display="flex" w="100%" justifyContent="between">
                         <Text display="flex" alignItems="center" bg="gray.50" w="100%" h="38px" px="4px" borderRadius="8px">
                             {counts}
@@ -44,13 +44,18 @@ function App() {
                             {result}
                         </Text>
                     </Box>
-                    <Numbers data={counts} onClick={setCounts} />
                 </Box>
                 <Box display="flex">
-                    <CountButton data={counts} expression={'+'} onClick={applyExpression} />
-                    <CountButton data={counts} expression={'-'} onClick={applyExpression} />
-                    <CountButton data={counts} expression={'*'} onClick={applyExpression} />
-                    <CountButton data={counts} expression={'/'} onClick={applyExpression} />
+                    <Numbers data={counts} onClick={setCounts} />
+                    <Box display="flex" gap="8px" paddingTop="4px" flexDirection="column">
+                        <CountButton data={counts} expression={'+'} onClick={applyExpression} />
+                        <CountButton data={counts} expression={'-'} onClick={applyExpression} />
+                        <CountButton data={counts} expression={'*'} onClick={applyExpression} />
+                        <CountButton data={counts} expression={'/'} onClick={applyExpression} />
+                    </Box>
+                    <Button bg="tomato" marginLeft="8px" marginTop="4px" onClick={ () => {setResult(eval(counts))}}>
+                        =
+                    </Button>
                 </Box>
             </Box>
             </div>
@@ -58,12 +63,20 @@ function App() {
     )
 
     function CountButton (props) {
-        // const expression= /\+|\-|\/|\*| /
-        // const lastNumber = props.data[props.data.length - 1]
-        // function checkExpressionType () {
-        //     if (expressions.test(lastNumber)) return
-        //     props.onClick(props.data + props.expression)
-        // }
+
+        const expressions= /\+|\-|\/|\*| /
+        const lastNumber = props.data[props.data.length - 1]
+        function checkExpressionType () {
+            if (expressions.test(lastNumber)) return
+            props.onClick(props.data + props.expression)
+        }
+
+    return (
+        <Button onClick= {() => {checkExpressionType()} }>
+            {props.expression}
+        </Button>
+        )
+    }
 
         // return (
         //     <Button onClick= {() => {props.onClick(props.data + props.expression)}}>
@@ -71,14 +84,6 @@ function App() {
         //     </Button>
 
         // )
-
-        return (
-            <Button onClick= {() => {props.onClick(props.data + props.expression)}}>
-                {props.expression}
-            </Button>
-
-        )
-      }
 
       function applyExpression (countedNumber) {
             setCounts(countedNumber)
